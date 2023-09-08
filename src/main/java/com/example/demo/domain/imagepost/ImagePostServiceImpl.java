@@ -11,4 +11,5 @@ public class ImagePostServiceImpl extends AbstractServiceImpl<ImagePost> {
     public ImagePostServiceImpl(ImagePostRepository repository) {
         super(repository);
     }
+
 }
