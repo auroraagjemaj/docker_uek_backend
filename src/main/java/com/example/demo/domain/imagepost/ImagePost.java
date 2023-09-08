@@ -2,6 +2,8 @@ package com.example.demo.domain.imagepost;
 
 import com.example.demo.core.generic.AbstractEntity;
 import com.example.demo.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
