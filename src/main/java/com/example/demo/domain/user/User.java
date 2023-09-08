@@ -6,6 +6,7 @@ import com.example.demo.domain.role.Role;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,8 +41,10 @@ public class User extends AbstractEntity {
   @OneToMany(
           mappedBy = "author",
           cascade = CascadeType.ALL,
-          orphanRemoval = true
+          orphanRemoval = true,
+          fetch=FetchType.EAGER
   )
+@JsonBackReference
   private List<ImagePost> imagePosts = new ArrayList<>();
 
   public User(UUID id, String firstName, String lastName, String email, String password, Set<Role> roles) {
