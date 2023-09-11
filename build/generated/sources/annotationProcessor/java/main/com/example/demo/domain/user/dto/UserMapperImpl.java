@@ -2,6 +2,8 @@ package com.example.demo.domain.user.dto;
 
 import com.example.demo.domain.authority.Authority;
 import com.example.demo.domain.authority.dto.AuthorityDTO;
+import com.example.demo.domain.imagepost.ImagePost;
+import com.example.demo.domain.imagepost.dto.ImagePostDTO;
 import com.example.demo.domain.role.Role;
 import com.example.demo.domain.role.dto.RoleDTO;
 import com.example.demo.domain.user.User;
@@ -14,8 +16,13 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
+<<<<<<< HEAD
     date = "2023-09-08T13:21:49+0200",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.0.jar, environment: Java 17.0.8.1 (Amazon.com Inc.)"
+=======
+    date = "2023-09-11T11:23:33+0200",
+    comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.0.jar, environment: Java 17.0.6 (Oracle Corporation)"
+>>>>>>> 5433299bcfa178d63010af63ffb8c218a31669d5
 )
 @Component
 public class UserMapperImpl implements UserMapper {
@@ -33,6 +40,7 @@ public class UserMapperImpl implements UserMapper {
         user.setLastName( dto.getLastName() );
         user.setEmail( dto.getEmail() );
         user.setRoles( roleDTOSetToRoleSet( dto.getRoles() ) );
+        user.setImagePosts( imagePostDTOListToImagePostList( dto.getImagePosts() ) );
 
         return user;
     }
@@ -78,6 +86,7 @@ public class UserMapperImpl implements UserMapper {
         userDTO.setLastName( BO.getLastName() );
         userDTO.setEmail( BO.getEmail() );
         userDTO.setRoles( roleSetToRoleDTOSet( BO.getRoles() ) );
+        userDTO.setImagePosts( imagePostListToImagePostDTOList( BO.getImagePosts() ) );
 
         return userDTO;
     }
@@ -180,6 +189,35 @@ public class UserMapperImpl implements UserMapper {
         return set1;
     }
 
+    protected ImagePost imagePostDTOToImagePost(ImagePostDTO imagePostDTO) {
+        if ( imagePostDTO == null ) {
+            return null;
+        }
+
+        ImagePost imagePost = new ImagePost();
+
+        imagePost.setId( imagePostDTO.getId() );
+        imagePost.setImage( imagePostDTO.getImage() );
+        imagePost.setDescription( imagePostDTO.getDescription() );
+        imagePost.setLikes( imagePostDTO.getLikes() );
+        imagePost.setAuthor( imagePostDTO.getAuthor() );
+
+        return imagePost;
+    }
+
+    protected List<ImagePost> imagePostDTOListToImagePostList(List<ImagePostDTO> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<ImagePost> list1 = new ArrayList<ImagePost>( list.size() );
+        for ( ImagePostDTO imagePostDTO : list ) {
+            list1.add( imagePostDTOToImagePost( imagePostDTO ) );
+        }
+
+        return list1;
+    }
+
     protected AuthorityDTO authorityToAuthorityDTO(Authority authority) {
         if ( authority == null ) {
             return null;
@@ -231,5 +269,34 @@ public class UserMapperImpl implements UserMapper {
         }
 
         return set1;
+    }
+
+    protected ImagePostDTO imagePostToImagePostDTO(ImagePost imagePost) {
+        if ( imagePost == null ) {
+            return null;
+        }
+
+        ImagePostDTO imagePostDTO = new ImagePostDTO();
+
+        imagePostDTO.setId( imagePost.getId() );
+        imagePostDTO.setImage( imagePost.getImage() );
+        imagePostDTO.setDescription( imagePost.getDescription() );
+        imagePostDTO.setLikes( imagePost.getLikes() );
+        imagePostDTO.setAuthor( imagePost.getAuthor() );
+
+        return imagePostDTO;
+    }
+
+    protected List<ImagePostDTO> imagePostListToImagePostDTOList(List<ImagePost> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<ImagePostDTO> list1 = new ArrayList<ImagePostDTO>( list.size() );
+        for ( ImagePost imagePost : list ) {
+            list1.add( imagePostToImagePostDTO( imagePost ) );
+        }
+
+        return list1;
     }
 }
