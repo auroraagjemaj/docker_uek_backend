@@ -6,9 +6,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.UUID;
 
+@Log4j2
 @NoArgsConstructor
 @Getter
 @Setter
@@ -28,6 +30,16 @@ public class ImagePost extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
+
+    @PostPersist
+    public void newImagePostAdded(){
+        log.info("Created a new post.");
+    }
+
+    @PostUpdate
+    public void imagePostUpdated(){
+        log.info("Updated post.");
+    }
 
 
     public ImagePost(UUID id, String image, String description, Integer likes, User author){

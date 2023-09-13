@@ -9,8 +9,10 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
@@ -20,15 +22,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MultipartException;
 
+@Log4j2
 @RestControllerAdvice
 @AllArgsConstructor
 public class CustomGlobalExceptionHandler {
-
-  /*@ExceptionHandler(ResourceNotFoundException.class)
-  public ResponseError resourceNotFoundExceptionHandler(ResourceNotFoundException rnfe){
-
-  }*/
-
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(value = HttpStatus.BAD_REQUEST)

@@ -3,6 +3,7 @@ package com.example.demo.domain.imagepost;
 
 import com.example.demo.domain.imagepost.dto.ImagePostDTO;
 import com.example.demo.domain.imagepost.dto.ImagePostMapper;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@Transactional//für Luca
 @RestController
 @RequestMapping("/imagepost")
 public class ImagePostController {
@@ -37,8 +39,7 @@ public class ImagePostController {
     @PreAuthorize("hasAuthority('POST_CREATE')")
     @PostMapping({"", "/"})
     public ResponseEntity createImagePost(@Valid @RequestBody ImagePost imagePost){
-        imagePostService.save(imagePost);
-        return ResponseEntity.ok().body("Created post!");
+        return ResponseEntity.ok().body(imagePostMapper.toDTO(imagePostService.save(imagePost)));
     }
 
     @PreAuthorize("hasAuthority('POST_DELETE')")
@@ -51,7 +52,6 @@ public class ImagePostController {
     @PreAuthorize("hasAuthority('POST_UPDATE')")
     @PutMapping("/{id}")
     public ResponseEntity updateImagePost(@Valid @RequestBody ImagePostDTO imagePostDTO, @PathVariable ("id") UUID id){
-        imagePostService.updateById(id, imagePostMapper.fromDTO(imagePostDTO));
-        return ResponseEntity.ok().body("Updated post!");
+        return ResponseEntity.ok().body(imagePostMapper.toDTO(imagePostService.updateById(id, imagePostMapper.fromDTO(imagePostDTO))));
     }
 }
