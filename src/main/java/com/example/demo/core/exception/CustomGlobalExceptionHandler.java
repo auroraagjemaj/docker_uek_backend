@@ -24,6 +24,12 @@ import org.springframework.web.multipart.MultipartException;
 @AllArgsConstructor
 public class CustomGlobalExceptionHandler {
 
+  /*@ExceptionHandler(ResourceNotFoundException.class)
+  public ResponseError resourceNotFoundExceptionHandler(ResourceNotFoundException rnfe){
+
+  }*/
+
+
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(value = HttpStatus.BAD_REQUEST)
   public ResponseError handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpServletRequest request) {
