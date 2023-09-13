@@ -22,6 +22,12 @@ public class ImagePostController {
     @Autowired
     private ImagePostMapper imagePostMapper;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ImagePostDTO> retrieveImagePostById(@PathVariable("id") UUID id) {
+        ImagePost imagePost = imagePostService.findById(id);
+        return new ResponseEntity<>(imagePostMapper.toDTO(imagePost), HttpStatus.OK);
+    }
+
     @GetMapping({"", "/"})
     public ResponseEntity<List<ImagePostDTO>> retrieveAll(){
         List<ImagePost> imagePosts = imagePostService.findAll();
