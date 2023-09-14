@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "b7368369-6a90-466f-a1e6-25125ec3e93c",
+		"name": "üK223",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26283211"
+	},
+	"item": [
+		{
+			"name": "Get all",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Value in image URL\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].image).to.not.eql(null);\r",
+							"});\r",
+							"pm.test(\"Value in author\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].author).to.not.eql(null);\r",
+							"});\r",
+							"pm.test(\"Likes not negative\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].likes).to.not.be.below(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiYTgwNGNiOS1mYTE0LTQyYTUtYWZhZi1iZTQ4ODc0MmZjNTQiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiVVNFUl9ERUxFVEUifSx7ImF1dGhvcml0eSI6IlBPU1RfQ1JFQVRFIn0seyJhdXRob3JpdHkiOiJVU0VSX01PRElGWSJ9LHsiYXV0aG9yaXR5IjoiUE9TVF9ERUxFVEUifSx7ImF1dGhvcml0eSI6IlBPU1RfVVBEQVRFIn0seyJhdXRob3JpdHkiOiJQT1NUX0NSRUFURSJ9LHsiYXV0aG9yaXR5IjoiUE9TVF9ERUxFVEUifSx7ImF1dGhvcml0eSI6IlBPU1RfVVBEQVRFIn1dLCJpYXQiOjE2OTQ1OTYzNzYsImV4cCI6MTY5NDY5NjM3NiwiaXNzIjoidWsyMjMifQ.jvdBOQvtC6YhwAgkxkPGB_ayQw8tM-knh3K2XtDKceo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/imagepost/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"imagepost",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Update no auth",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
